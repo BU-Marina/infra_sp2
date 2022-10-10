@@ -1,12 +1,12 @@
 import os
 from datetime import timedelta
-from dotenv import load_dotenv
-
-load_dotenv()
+from django.core.management.utils import get_random_secret_key
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-DEBUG = True
+SECRET_KEY = get_random_secret_key()
+
+DEBUG = os.getenv('DEBUG', default=False)
 
 ALLOWED_HOSTS = ['*']
 
@@ -57,7 +57,7 @@ WSGI_APPLICATION = 'api_yamdb.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': os.getenv('DB_ENGINE', default=''),
+        'ENGINE': os.getenv('DB_ENGINE', default='django.db.backends.postgresql'),
         'NAME': os.getenv('DB_NAME', default=''),
         'USER': os.getenv('POSTGRES_USER', default=''),
         'PASSWORD': os.getenv('POSTGRES_PASSWORD', default=''),
@@ -113,7 +113,7 @@ SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
 
     'ALGORITHM': 'HS256',
-    'SIGNING_KEY': os.getenv('SECRET_KEY', default=''),
+    'SIGNING_KEY': SECRET_KEY,
 
     'AUTH_HEADER_TYPES': ('Bearer',),
     'USER_ID_FIELD': 'username',
