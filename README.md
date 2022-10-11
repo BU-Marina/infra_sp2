@@ -12,3 +12,17 @@
     DB_PORT=<port>
 
     DEBUG=<debug>
+
+## Запуск приложения в контейнерах
+
+Выполнить из директории с файлом docker-compose.yaml
+
+```
+docker-compose up -d --build
+```
+
+## Заполнение БД начальными данными
+
+```
+docker-compose exec web python manage.py loaddata fixtures.json
+```
