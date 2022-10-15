@@ -12,6 +12,7 @@
     DB_PORT=<port>
 
     DEBUG=<debug>
+    SECRET_KEY=''
 
 ## Запуск приложения в контейнерах
 
